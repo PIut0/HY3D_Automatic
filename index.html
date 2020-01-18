@@ -8,7 +8,7 @@
     </style>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./css/index.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <title>Hello World!</title>
   </head>
 
@@ -22,38 +22,43 @@
       </div>
     </nav>
     <div class="main_content">
-      <table>
+      <table class="input_content">
         <tr>
-          <div class="row_content">
-            <td>
-              <h1>PDF파일</h1>
-            </td>
-            <td>
-              <input class="upload-name" value="파일선택" disabled="disabled" type="text">
-              <label for="pdfFile">업로드</label>
-              <input type="file" id="pdfFile" class="upload-hidden">
-            </td>
-          </div>
+          <td>
+            <h1>PDF파일</h1>
+          </td>
+          <td>
+            <input class="upload-name" id="upload-name-id" value="파일선택" disabled="disabled" type="text">
+            <label for="pdfFile">업로드</label>
+            <input type="file" id="pdfFile" class="upload-hidden">
+          </td>
         </tr>
         <tr>
-          <div class="row_content">
-            <td>
-              <h1>Excel No.</h1>
-            </td>
-            <td>
-              <input type="text" id="excel_no">
-            </td>
-          </div>
+          <td>
+            <h1>Excel No.</h1>
+          </td>
+          <td>
+            <input type="text" id="excel_no">
+          </td>
         </tr>
         <tr>
-          <div class="row_content">
-            <td>
-              <h1>제작 시간</h1>
-            </td>
-            <td>
-              <input type="text" id="time">
-            </td>
-          </div>
+          <td>
+            <h1>제작 시간</h1>
+          </td>
+          <td>
+            <input type="text" id="time">
+          </td>
+        </tr>
+      </table>
+
+      <table class="part_content" id="part_content" border="1">
+        <tr>
+          <td>주문 내역</td>
+          <td>수량</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
         </tr>
       </table>
       <!-- <div class="row_content">
@@ -74,8 +79,10 @@
     </div>
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>
-    <script>
+    <script src="./js/pdfRead.js"></script>
+    <!-- <script>
       $(document).ready(function (){
+        console.log("test");
         var fileTarget = $('.upload-hidden');
 
         fileTarget.on('change', function(){
@@ -90,6 +97,6 @@
         })
 
       })
-    </script>
+    </script> -->
   </body>
 </html>

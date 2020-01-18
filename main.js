@@ -62,7 +62,6 @@ app.on('activate', function () {
 
 
 
-let dataBuffer = "D:/Plut0/Data/개발/Node.js/test2/test.pdf";
 // console.log(dataBuffer);
 
 function wait() {
@@ -73,42 +72,36 @@ function wait() {
   });
 }
 
-exports.pdfParsing = async function(pdfList){
-  console.log(typeof(pdfList));
+exports.pdfParsing = async function(pdfFile){
   var arr = []
-  for(var index in pdfList){
-    dataBuffer = pdfList[index];
-    dataBuffer = fs.readFileSync(dataBuffer);
-    pdf(dataBuffer).then(function(data) {
-        console.log('Start');
-        var text = data.text;
-        var test = jschar.detect(text);
-        text = iconv.encode(text,"utf-8").toString();
-        var lst = text;
-        text = text.split("\n");
-        for(var i = 0; i < text.length; i++){
-          var line = text[i];
-          var next = line.indexOf("x");
-          if(next != -1){
-            if(line.indexOf("x",next) != -1 && line.indexOf("mm",next) != -1){
-              arr.push(text[i-1]);
-              // arr.push(text[i]);
-              arr.push(text[i+1]);
-            }
+  dataBuffer = pdfFile;
+  dataBuffer = fs.readFileSync(dataBuffer);
+  pdf(dataBuffer).then(function(data) {
+      console.log('Start');
+      var text = data.text;
+      var test = jschar.detect(text);
+      text = iconv.encode(text,"utf-8").toString();
+      var lst = text;
+      text = text.split("\n");
+      for(var i = 0; i < text.length; i++){
+        var line = text[i];
+        var next = line.indexOf("x");
+        if(next != -1){
+          if(line.indexOf("x",next) != -1 && line.indexOf("mm",next) != -1){
+            arr.push(text[i-1]);
+            // arr.push(text[i]);
+            arr.push(text[i+1]);
           }
         }
-        // console.log(text.toString());
-        console.log('End');
-        // arr = arr.join("\n");
-        // fs.writeFileSync("test.txt",arr);
-        // console.log(test);
-    });
-  }
+      }
+      // console.log(text.toString());
+      console.log('End');
+      // arr = arr.join("\n");
+      // fs.writeFileSync("test.txt",arr);
+      // console.log(test);
+  });
   await wait();
   // arr = arr.join("\n");
   console.log(typeof(arr));
   return arr;
-  fs.writeFileSync("test.txt",arr);
-  // result.join("\n");
-  console.log("test");
 }

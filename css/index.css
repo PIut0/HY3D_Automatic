@@ -29,10 +29,10 @@
     justify-content: center;
     align-items: center;
 } */
-td input[type="file"]{
+.input_content td input[type="file"]{
     display: none;
 }
-td input[type="text"]{
+.input_content td input[type="text"]{
     margin: 15px;
     padding: 5px;
     width: 150px;
@@ -41,9 +41,15 @@ td input[type="text"]{
     box-shadow: none;
     border: 1px solid black;
 }
-td label{
+.input_content td label{
     background-color: coral;
     border-radius: 5px;
     padding: 7px;
     font-size: 14px;
+}
+
+.part_content td{
+    text-align: center;
+    font-size: 20px;
+    padding: 7px 15px;
 }
