@@ -7,16 +7,89 @@
       }
     </style>
     <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <title>Hello World!</title>
   </head>
 
   <body>
-    <h1>Hello World!</h1>
+    <nav class="nav_bar">
+      <div id="est_make">
+        견적서 작성
+      </div>
+      <div id="est_modify">
+        견적서 수정
+      </div>
+    </nav>
+    <div class="main_content">
+      <table>
+        <tr>
+          <div class="row_content">
+            <td>
+              <h1>PDF파일</h1>
+            </td>
+            <td>
+              <input class="upload-name" value="파일선택" disabled="disabled" type="text">
+              <label for="pdfFile">업로드</label>
+              <input type="file" id="pdfFile" class="upload-hidden">
+            </td>
+          </div>
+        </tr>
+        <tr>
+          <div class="row_content">
+            <td>
+              <h1>Excel No.</h1>
+            </td>
+            <td>
+              <input type="text" id="excel_no">
+            </td>
+          </div>
+        </tr>
+        <tr>
+          <div class="row_content">
+            <td>
+              <h1>제작 시간</h1>
+            </td>
+            <td>
+              <input type="text" id="time">
+            </td>
+          </div>
+        </tr>
+      </table>
+      <!-- <div class="row_content">
+        <h1>PDF파일</h1>
+        <input class="upload-name" value="파일선택" disabled="disabled" type="text">
+        <label for="ex_filename">업로드</label>
+        <input type="file" id="ex_filename" class="upload-hidden">
+      </div>
+      <div class="row_content">
+        <h1>Excel No.</h1>
+        <input type="text" id="excel_no">
+      </div>
+      <div class="row_content">
+        <h1>제작 시간</h1>
+        <input type="text" id="time">
+      </div> -->
 
+    </div>
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>
+    <script>
+      $(document).ready(function (){
+        var fileTarget = $('.upload-hidden');
+
+        fileTarget.on('change', function(){
+          if(window.FileReader){
+            var filename = $(this)[0].files[0].name;
+          }
+          else{
+            var filename = $(this).val().split('/').pop().split('\\').pop();
+          }
+
+          $(this).siblings('.upload-name').val(filename);
+        })
+
+      })
+    </script>
   </body>
 </html>
