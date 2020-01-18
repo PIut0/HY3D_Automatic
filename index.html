@@ -8,7 +8,16 @@
     </style>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./css/index.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+      if (typeof module === 'object') {window.module = module; module = undefined;}
+    </script>
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+    <script>
+      if (window.module) module = window.module;
+    </script>
+    <!-- electron에서 node-integration 이슈도 해결하면서 jquery등의 라이브러리도 사용가능 -->
     <title>Hello World!</title>
   </head>
 
@@ -61,7 +70,7 @@
           <td></td>
         </tr>
       </table>
-      <!-- <div class="row_content">
+      <!-- <div class="row_con tent">
         <h1>PDF파일</h1>
         <input class="upload-name" value="파일선택" disabled="disabled" type="text">
         <label for="ex_filename">업로드</label>
@@ -75,7 +84,19 @@
         <h1>제작 시간</h1>
         <input type="text" id="time">
       </div> -->
-
+      <div class="more_content">
+        <h1 class="more_info">상세 정보 표시</h1>
+        <table class="more_info_table" border="1">
+          <tr>
+            <td>소요일자</td>
+            <td><input type="text" value="3"></td>
+          </tr>
+          <tr>
+            <td>배송여부</td>
+            <td><input type="text" value="3"></td>
+          </tr>
+        </table>
+      </div>
     </div>
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>
@@ -98,5 +119,15 @@
 
       })
     </script> -->
+    <script>
+      $(document).ready(function (){
+        var more_toggle = $(".more_info");
+        var more_info_table = $(".more_info_table");
+        more_toggle.on("click", function(){
+          more_info_table.toggle();
+        })
+
+      })
+    </script>
   </body>
 </html>
