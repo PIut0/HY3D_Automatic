@@ -97,10 +97,14 @@
           </tr>
         </table>
       </div>
+      <button id="submit">
+        완료
+      </button>
     </div>
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>
     <script src="./js/pdfRead.js"></script>
+    <script src="./js/xlRead.js"></script>
     <!-- <script>
       $(document).ready(function (){
         console.log("test");
@@ -119,15 +123,8 @@
 
       })
     </script> -->
-    <script>
-      $(document).ready(function (){
-        var more_toggle = $(".more_info");
-        var more_info_table = $(".more_info_table");
-        more_toggle.on("click", function(){
-          more_info_table.toggle();
-        })
-
-      })
-    </script>
+    <script src="./js/index.js"></script>
   </body>
 </html>
+
+<!-- item 명 가져오기 -->

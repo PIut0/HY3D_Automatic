@@ -44,8 +44,9 @@
 .input_content td label{
     background-color: coral;
     border-radius: 5px;
-    padding: 7px;
+    padding: 10px;
     font-size: 14px;
+    border: 1px solid black;
 }
 
 .part_content td{
@@ -56,4 +57,14 @@
 
 .more_info_table{
     display: none;
+    margin-bottom: 30px;
+}
+
+button{
+    background-color: coral;
+    border-radius: 5px;
+    padding: 15px 40px;
+    font-size: 30px;
+    font-weight: 500;
+    border: 1px solid black;
 }
