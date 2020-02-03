@@ -4,295 +4,315 @@
         <title>PdfForm</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="./css/form.css">
+        <!-- <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script> -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="./js/html2pdf.bundle.min.js"></script>
+        
     </head>
     <body>
-        <h1 class="estimation">견 적 서 (ESTIMATION)</h1>
-        <div class="header">
-            <div class="header_left">
-                <div id="group_name">
-                    <p>
-                        우수정밀 홍길동
-                    </p>
+        <div id="content">
+
+            <h1 class="estimation">견 적 서 (ESTIMATION)</h1>
+            <div class="header">
+                <div class="header_left">
+                    <div id="group_name">
+                        <p>
+                            우수정밀 홍길동
+                        </p>
+                    </div>
+                    <div class="left_header_cont">
+                        귀사의 일익 번창하심을 기원합니다.<br>
+                        문의하신 제품 제작에 대한 예산 내역서를 제출하오니<br>
+                        업무 참조 바랍니다.
+                    </div>
                 </div>
-                <div class="left_header_cont">
-                    귀사의 일익 번창하심을 기원합니다.<br>
-                    문의하신 제품 제작에 대한 예산 내역서를 제출하오니<br>
-                    업무 참조 바랍니다.
+                <div class="header_right">
+                    <h2>하이쓰리디(HY3D)</h2>
+                    <div>
+                        사업자등록번호: 480-81-01029<br>
+                        업태: 제조업, 서비스업<br>
+                        소재: 경기도 안산시 상록구 사3동 1271<br>
+                        한양대학교 erica캠퍼스 창업보육센터 210호<br>
+                        연락처: 031-436-8029<br>
+                        <p>대표이사 이정욱</p>
+                    </div>
                 </div>
             </div>
-            <div class="header_right">
-                <h2>하이쓰리디(HY3D)</h2>
-                <div>
-                    사업자등록번호: 480-81-01029<br>
-                    업태: 제조업, 서비스업<br>
-                    소재: 경기도 안산시 상록구 사3동 1271<br>
-                    한양대학교 erica캠퍼스 창업보육센터 210호<br>
-                    연락처: 031-436-8029<br>
-                    <p>대표이사 이정욱</p>
-                </div>
+            <div class="div1">□ 제 품 명 : <span id="item_name" ></span ></div>
+            <div class="div1">□ 합계금액 : <span id="result_price2" ></span></div>
+    
+    
+    
+            <div class="div1">
+                □ 세부내역
+                <p>*워킹데이기준</p>
             </div>
-        </div>
-        <div id="item_name" class="div1">□ 제 품 명 : (제품명)</div>
-        <div id="result_price" class="div1">□ 합계금액 : (합계금액)</div>
-
-
-
-        <div class="div1">
-            □ 세부내역
-            <p>*워킹데이기준</p>
-        </div>
-        <table style="width:100%" border="1">
-            <tr>
-              <td width="100px">No.</td>
-              <td >제품명</td>
-              <td width="125px">소요일자</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td style="text-align: left; padding-left: 5px;">slsbio_1차수정안 제작	</td>
-              <td>2일</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td></td>
-              <td></td>
-            </tr>
-        </table>
-
-
-        <p class="sub_title">
-            1. 3D 모델링 제작
-        </p>
-        <table style="width:100%" border="1">
-            <tr>
-              <td width="100px">No.</td>
-              <td >내역</td>
-              <td width="120px">담당자</td>
-              <td width="120px">소요일</td>
-              <td width="120px">단가(원)</td>
-              <td width="125px">금액(원)</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td style="text-align: left;padding-left: 5px;">slsbio_1차수정안 제작	</td>
-              <td></td>
-              <td></td>
-              <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-              <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td colspan="5">소계</td>
-              <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-            </tr>
-        </table>
-
-
-
-        <p class="sub_title">
-            2. 3D 프린팅 제작
-        </p>
-        <table style="width:100%" border="1">
-            <tr>
-              <td width="100px" rowspan="2">No.</td>
-              <td rowspan="2">내역</td>
-              <td colspan="2">장비사용료</td>
-              <td colspan="3">재료소모량</td>
-              <td width="125px" rowspan="2">금액(원)</td>
-            </tr>
-            <tr>
-              <td width="100px">제작시간</td>
-              <td width="100px">금액(원)</td >
-              <td width="120px">Model(g)</td>
-              <td width="120px">수량</td>
-              <td width="120px">금액(원</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td >slsbio_1차수정안 제작	</td>
-              <td rowspan="4"></td>
-              <td class="left_td" rowspan="4"> ₩ <span style="float: right;">-</span></td>
-              <td></td>
-              <td></td>
-              <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-              <td class="left_td" rowspan="4"> ₩ <span style="float: right;">-</span></td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td >slsbio_1차수정안 제작	</td>
-              <td></td>
-              <td></td>
-              <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>slsbio_1차수정안 제작	</td>
-              <td></td>
-              <td></td>
-              <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>slsbio_1차수정안 제작	</td>
-              <td></td>
-              <td></td>
-              <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-            </tr>
-            <tr>
-              <td colspan="7">소계</td>
-              <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-            </tr>
-        </table><br>
-        <table style="float: right;">
-            <tr>
-                <td width="120px"></td>
-                <td width="120px">
-                    제품
-                </td>
-                <td width="125px">
-                    단가
-                </td>
-            </tr>
-            <tr>
-                <td >
-                    Model
-                </td>
-                <td class="left_td">
-                    ABS like
-                </td>
-                <td class="right_td">
-                    700원/g
-                </td>
-            </tr>
-            <tr>
-                <td >
-                    3D 프린터
-                </td>
-                <td class="left_td">
-                    SLA
-                </td>
-                <td class="right_td">
-                    30,000원/시간
-                </td>
-            </tr>
-        </table>
-
-
-
-
-        <p class="sub_title" style="margin-top: 100px;">
-            3. 도색
-        </p>
-        <table style="width:100%" border="1">
-            <tr>
-              <td width="100px">No.</td>
-              <td >내역</td>
-              <td width="120px">수량</td>
-              <td width="120px">단가(원)</td>
-              <td width="125px">금액(원)</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td style="text-align: left;padding-left: 5px;">slsbio_1차수정안 제작	</td>
-              <td></td>
-              <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-              <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-            </tr>
-            <tr>
-              <td colspan="4">소계</td>
-              <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-            </tr>
-        </table>
-
-
-
-
-        <p class="sub_title">
-            4. 배송
-        </p>
-        <table style="width:100%" border="1">
-            <tr>
-              <td width="100px">No.</td>
-              <td >내역</td>
-              <td width="120px">수량</td>
-              <td width="120px">단가(원)</td>
-              <td width="125px">금액(원)</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td style="text-align: left;padding-left: 5px;">slsbio_1차수정안 제작	</td>
-              <td></td>
-              <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-              <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-            </tr>
-            <tr>
-              <td colspan="4">소계</td>
-              <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-            </tr>
-        </table>
-
-
-
-
-        <p class="sub_title">
-            5. 총계
-        </p>
-        <table style="width:100%" border="1">
-            <tr>
-              <td width="100px">No.</td>
-              <td >내역</td>
-              <td width="120px">3D 모델링</td>
-              <td width="120px">3D 프린팅</td>
-              <td width="120px">도색</td>
-              <td width="120px">배송</td>
-              <td width="125px">금액(원)</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td style="text-align: left;padding-left: 5px;">slsbio_1차수정안 제작	</td>
-              <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-              <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-              <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-              <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-              <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-            </tr>
-            <tr>
-              <td colspan="6">공급가액</td>
-              <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-            </tr>
-            </tr>
-            <tr>
-              <td colspan="6">V. A. T.</td>
-              <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-            </tr>
-            </tr>
-            <tr>
-              <td colspan="6">최종금액</td>
-              <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-            </tr>
-        </table>
-
-
-        <div class="list">
-            <p>
-                1. 대금 지불기준<br>
-                &nbsp;: 3D 출력제작 비용 선납<br><br>
-                2. 제작기간<br>
-                &nbsp;: 상호 합의하에 일정 조정 가능<br><br>
-                3. 모델링 제작<br>
-                &nbsp;: 모델링 수정작업 요청시, 작업시간에 비례하여 견적가가 변동될 수 있음<br><br>
-                4. 프린팅 제작<br>
-                &nbsp;: 출력 진행시 수정 및 중단이 불가하며, 제작기간 이후의 제품에 대해서 A/S 지원 불가<br><br>
+            <table style="width:100%" border="1">
+                <tr>
+                  <td width="100px">No.</td>
+                  <td >제품명</td>
+                  <td width="125px">소요일자</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td style="text-align: left; padding-left: 5px;" id="item_name2">slsbio_1차수정안 제작	</td>
+                  <td id="req_date">2일</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+            </table>
+    
+    
+            <p class="sub_title">
+                1. 3D 모델링 제작
             </p>
-        </div>
+            <table id="make_modeling_table" style="width:100%" border="1">
+                <tr>
+                  <td width="100px">No.</td>
+                  <td >내역</td>
+                  <td width="120px">담당자</td>
+                  <td width="120px">소요일</td>
+                  <td width="120px">단가(원)</td>
+                  <td width="125px">금액(원)</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td style="text-align: left;padding-left: 5px;"></td>
+                  <td></td>
+                  <td></td>
+                  <td class="left_td"> ₩ <span style="float: right;">-</span></td>
+                  <td class="left_td"> ₩ <span style="float: right;">-</span></td>
+                </tr>
+                <tr>
+                  <td colspan="5">소계</td>
+                  <td class="left_td"> ₩ <span style="float: right;">-</span></td>
+                </tr>
+            </table>
+    
+    
+    
+            <p class="sub_title">
+                2. 3D 프린팅 제작
+            </p>
+            <table id="make_printing_table" style="width:100%" border="1">
+                <tr>
+                  <td width="100px" rowspan="2">No.</td>
+                  <td rowspan="2">내역</td>
+                  <td colspan="2">장비사용료</td>
+                  <td colspan="3">재료소모량</td>
+                  <td width="125px" rowspan="2">금액(원)</td>
+                </tr>
+                <tr>
+                  <td width="100px">제작시간</td>
+                  <td width="100px">금액(원)</td >
+                  <td width="120px">Model(g)</td>
+                  <td width="120px">수량</td>
+                  <td width="120px">금액(원)</td>
+                </tr>
+                <!-- <tr>
+                  <td>1</td>
+                  <td >slsbio_1차수정안 제작	</td>
+                  <td rowspan="8"></td>
+                  <td class="left_td" rowspan="8"> ₩ <span style="float: right;">-</span></td>
+                  <td></td>
+                  <td></td>
+                  <td class="left_td"> ₩ <span style="float: right;">-</span></td>
+                  <td class="left_td" rowspan="8"> ₩ <span style="float: right;">-</span></td>
+                </tr> -->
+                <!-- <tr>
+                  <td>2</td>
+                  <td >slsbio_1차수정안 제작	</td>
+                  <td></td>
+                  <td></td>
+                  <td class="left_td"> ₩ <span style="float: right;">-</span></td>
+                </tr> -->
+                <!-- <tr>
+                  <td colspan="7">소계</td>
+                  <td class="left_td"> ₩ <span style="float: right;">-</span></td>
+                </tr> -->
 
-        <p class="date">견적일자 : 2020년 1월 30일<br>이상</p>
+
+            </table><br>
+
+
+            <table style="float: right;">
+                <tr>
+                    <td width="120px"></td>
+                    <td width="120px">
+                        제품
+                    </td>
+                    <td width="125px">
+                        단가
+                    </td>
+                </tr>
+                <tr>
+                    <td >
+                        Model
+                    </td>
+                    <td id="model" class="left_td">
+                        ABS like
+                    </td>
+                    <td id="model_g" class="right_td">
+                        700원/g
+                    </td>
+                </tr>
+                <tr>
+                    <td >
+                        3D 프린터
+                    </td>
+                    <td id="machine" class="left_td">
+                        SLA
+                    </td>
+                    <td id="machine_t" class="right_td">
+                        30,000원/시간
+                    </td>
+                </tr>
+            </table>
+    
+    
+    
+    
+            <p class="sub_title" style="margin-top: 100px;">
+                3. 도색
+            </p>
+            <table id="painting_table" style="width:100%" border="1">
+                <tr>
+                  <td width="100px">No.</td>
+                  <td >내역</td>
+                  <td width="120px">수량</td>
+                  <td width="120px">단가(원)</td>
+                  <td width="125px">금액(원)</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td style="text-align: left;padding-left: 5px;"></td>
+                  <td></td>
+                  <td class="left_td"> ₩ <span style="float: right;">-</span></td>
+                  <td class="left_td"> ₩ <span style="float: right;">-</span></td>
+                </tr>
+                <tr>
+                  <td colspan="4">소계</td>
+                  <td class="left_td"> ₩ <span style="float: right;">-</span></td>
+                </tr>
+            </table>
+    
+    
+    
+    
+            <p class="sub_title">
+                4. 배송
+            </p>
+            <table id="delivery_table" style="width:100%" border="1">
+                <tr>
+                  <td width="100px">No.</td>
+                  <td >내역</td>
+                  <td width="120px">수량</td>
+                  <td width="120px">단가(원)</td>
+                  <td width="125px">금액(원)</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td style="text-align: left;padding-left: 5px;" id="item_name3"></td>
+                  <td></td>
+                  <td class="left_td"> ₩ <span style="float: right;" id="delivery_price">-</span></td>
+                  <td class="left_td"> ₩ <span style="float: right;" id="delivery_price2">-</span></td>
+                </tr>
+                <tr>
+                  <td colspan="4">소계</td>
+                  <td class="left_td"> ₩ <span style="float: right;" id="delivery_price3">-</span></td>
+                </tr>
+            </table>
+    
+    
+    
+    
+            <p class="sub_title">
+                5. 총계
+            </p>
+            <table id="result_table" style="width:100%" border="1">
+                <tr>
+                  <td width="100px">No.</td>
+                  <td >내역</td>
+                  <td width="120px">3D 모델링</td>
+                  <td width="120px">3D 프린팅</td>
+                  <td width="120px">도색</td>
+                  <td width="120px">배송</td>
+                  <td width="125px">금액(원)</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td style="text-align: left;padding-left: 5px;" id="item_name4"></td>
+                  <td class="left_td"> ₩ <span style="float: right;" id="result_modeling">-</span></td>
+                  <td class="left_td"> ₩ <span style="float: right;" id="result_printing">-</span></td>
+                  <td class="left_td"> ₩ <span style="float: right;" id="result_painting">-</span></td>
+                  <td class="left_td"> ₩ <span style="float: right;" id="result_delivery">-</span></td>
+                  <td class="left_td"> ₩ <span style="float: right;" id="sum_price">-</span></td>
+                </tr>
+                <tr>
+                  <td colspan="6">공급가액</td>
+                  <td class="left_td"> ₩ <span style="float: right;" id="sum">-</span></td>
+                </tr>
+                </tr>
+                <tr>
+                  <td colspan="6">V. A. T.</td>
+                  <td class="left_td"> ₩ <span style="float: right;" id="vat">-</span></td>
+                </tr>
+                </tr>
+                <tr>
+                  <td colspan="6">최종금액</td>
+                  <td class="left_td"> ₩ <span style="float: right;" id="result_price">-</span></td>
+                </tr>
+            </table>
+    
+    
+            <div class="list">
+                <p>
+                    1. 대금 지불기준<br>
+                    &nbsp;: 3D 출력제작 비용 선납<br><br>
+                    2. 제작기간<br>
+                    &nbsp;: 상호 합의하에 일정 조정 가능<br><br>
+                    3. 모델링 제작<br>
+                    &nbsp;: 모델링 수정작업 요청시, 작업시간에 비례하여 견적가가 변동될 수 있음<br><br>
+                    4. 프린팅 제작<br>
+                    &nbsp;: 출력 진행시 수정 및 중단이 불가하며, 제작기간 이후의 제품에 대해서 A/S 지원 불가<br><br>
+                </p>
+            </div>
+    
+            <p class="date">견적일자 : <span id="today"></span><br>이상</p>
+        </div>
+<!-- 
+        <br><br>
+        <br><br>
+        <br><br>
+        <br><br>
+        <button onclick="submit()">submit</button> -->
     </body>
+    <script src="./js/form.js"></script>
+    <script>
+
+    function submit(){
+        var element = document.getElementById("content");
+        var opt = {
+            margin: 0,
+            filename: "test.pdf",
+            pagebreak: {
+                mode: 'avoid-all'
+            },
+            html2canvas:{
+                width: 1320,
+            },
+            jsPDF: {
+                format: 'a4',
+                unit:'in'
+            }
+        }
+        html2pdf(element,opt)
+    }
+
+
+    // doc.save('two-by-four.pdf')
+</script>
 </html>
