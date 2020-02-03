@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body{
+        background-color: white;
+      }
+    </style>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/index.css">
+    <script>
+      if (typeof module === 'object') {window.module = module; module = undefined;}
+    </script>
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+    <script>
+      if (window.module) module = window.module;
+    </script>
+    <!-- electron에서 node-integration 이슈도 해결하면서 jquery등의 라이브러리도 사용가능 -->
+    <title>Hello World!</title>
+  </head>
+
+  <body>
+    <nav class="nav_bar">
+      <div id="est_make">
+        견적서 작성
+      </div>
+      <div id="est_modify">
+        견적서 수정
+      </div>
+    </nav>
+    <nav class="setting">
+      <label for="xlPath">엑셀 파일</label>
+      <input type="file" id="xlPath" hidden>
+    </nav>
+    <div class="main_content">
+      <table class="input_content">
+        <tr>
+          <td>
+            <h1>PDF파일</h1>
+          </td>
+          <td>
+            <input class="upload-name" id="upload-name-id" value="파일선택" disabled="disabled" type="text">
+            <label for="pdfFile">업로드</label>
+            <input type="file" id="pdfFile" class="upload-hidden">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h1>Excel No.</h1>
+          </td>
+          <td>
+            <input type="text" id="excel_no">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h1>제작 시간</h1>
+          </td>
+          <td>
+            <input type="text" id="time">
+          </td>
+        </tr>
+      </table>
+
+      <table class="part_content" id="part_content" border="1">
+        <tr>
+          <td>주문 내역</td>
+          <td>수량</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+      <!-- <div class="row_con tent">
+        <h1>PDF파일</h1>
+        <input class="upload-name" value="파일선택" disabled="disabled" type="text">
+        <label for="ex_filename">업로드</label>
+        <input type="file" id="ex_filename" class="upload-hidden">
+      </div>
+      <div class="row_content">
+        <h1>Excel No.</h1>
+        <input type="text" id="excel_no">
+      </div>
+      <div class="row_content">
+        <h1>제작 시간</h1>
+        <input type="text" id="time">
+      </div> -->
+      <div class="more_content">
+        <h1 class="more_info">상세 정보 표시</h1>
+        <table class="more_info_table" border="1">
+          <tr>
+            <td>소요일자</td>
+            <td><input id="req_date" type="text" value="3"></td>
+          </tr>
+          <tr>
+            <td>배송가격</td>
+            <td><input id="delivery_price" type="text" value="4000"></td>
+          </tr>
+        </table>
+      </div>
+
+      
+
+      <button id="submit">
+        완료
+      </button>
+    </div>
+    <!-- You can also require other files to run in this process -->
+    <script src="./renderer.js"></script>
+    <!-- <script src="./js/pdfRead.js"></script> -->
+    <!-- <script src="./js/xlRead.js"></script> -->
+    <script src="./js/result.js"></script>
+    <script src="./js/index.js"></script>
+  </body>
+</html>
+
+<!-- item 명 가져오기 -->

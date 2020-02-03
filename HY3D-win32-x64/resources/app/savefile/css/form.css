@@ -1,0 +1,117 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+body{
+    background-color: white;
+}
+#content{
+    padding: 80px 60px;
+    width: 1200px;
+}
+.estimation{
+    border-bottom: 3.5px solid black;
+    padding-left: 15px;
+}
+
+.header{
+    padding-bottom: 16px;
+    border-bottom: 1.2px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.header_left{
+    margin-top: 42px;
+}
+.header_left #group_name{
+    position: relative;
+    display: inline-block;
+    border-top: 4px double black;
+    border-bottom: 2px dotted black;
+    width: 150%;
+    padding:6px;
+}
+.header_left #group_name p{
+    float: right;
+}
+.header_left .left_header_cont{
+    margin-top: 20px;
+}
+
+.header_right{
+    width: 370px;
+}
+.header_right h2{
+    padding: 5px;
+    padding-top: 8px;
+}
+.header_right div{
+    padding-left: 4px;
+    padding-top: 2px;
+    border-top: 4px double black;
+}
+.header_right div p{
+    margin-top: 15px;
+    float: right;
+}
+
+.div1{
+    padding-left: 5px;
+    padding-top: 25px;
+    letter-spacing: 3px;
+    font-size: 17px;
+}
+.div1 span{
+    letter-spacing: normal;
+}
+.sub_title{
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 40px;
+}
+
+.div1 p{
+    float: right;
+    letter-spacing: 1px;
+    font-size: 15px;
+}
+
+table{
+    text-align: center;
+    border-collapse: collapse;
+}
+td{
+    padding:2px;
+    vertical-align: middle;
+}
+.left_td{
+    text-align: left;
+    padding: 0px 7px;
+}
+.right_td{
+    text-align: right;
+    padding: 0px 7px;
+}
+
+#table1{
+    width: 100%;
+}
+
+.list{
+    margin: 40px;
+    text-align: center;
+}
+.list p{
+    text-align: left;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+    display: inline-block;
+}
+.date{
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: right;
+}

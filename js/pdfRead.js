@@ -16,10 +16,10 @@ exports.part_weight = part_weight;
 exports.part_name = part_name;
 
 async function handleFiles(file) {
-	// console.log("handle File")
+	// // console.log("handle File")
     let remove_table = document.querySelectorAll('.part_content tr');
     for(var i=1;i<remove_table.length;i++){
-		// console.log(remove_table[i]);
+		// // console.log(remove_table[i]);
 		remove_table[i].remove();
     }
 
@@ -32,8 +32,8 @@ async function handleFiles(file) {
 	var data = await main.pdfParsing(dataBuffer);
 	file_name = data[0]
 	exports.file_name = file_name;
-// console.log(file_name)
-    console.log(pdfFile.name);
+// // console.log(file_name)
+    // console.log(pdfFile.name);
     for(var i=1;i<data.length;i+=2){
 		let addPart = document.createElement("tr");
 		let partname = document.createElement("td");
@@ -51,14 +51,14 @@ async function handleFiles(file) {
 		document.getElementById("part_content").appendChild(addPart);
     }
 	part_weight = await weight_modify(part_weight)
-    console.log(part_weight)
+    // console.log(part_weight)
 }
 
 function weight_modify(part_weight){
 
     for(var i=0;i<part_weight.length;i++){
 		part_weight[i] = part_weight[i].split(" ")[0]*1
-		// console.log(part_weight[i])
+		// // console.log(part_weight[i])
 		if(part_weight[i]%5000 != 0){
 			part_weight[i] -= part_weight[i]%5000
 			part_weight[i] += 5000

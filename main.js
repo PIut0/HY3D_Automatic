@@ -67,7 +67,7 @@ app.on('activate', function () {
 
 
 
-// console.log(dataBuffer);
+// //console.log(dataBuffer);
 
 function wait() {
   return new Promise((resolve, reject) => {
@@ -82,7 +82,7 @@ exports.pdfParsing = async function (pdfFile) {
   dataBuffer = pdfFile;
   dataBuffer = fs.readFileSync(dataBuffer);
   pdf(dataBuffer).then(function (data) {
-    console.log('Start');
+    //console.log('Start');
     var text = data.text;
     var test = jschar.detect(text);
     text = iconv.encode(text, "utf-8").toString();
@@ -101,15 +101,15 @@ exports.pdfParsing = async function (pdfFile) {
         }
       }
     }
-    // console.log(text.toString());
-    console.log('End');
+    // //console.log(text.toString());
+    //console.log('End');
     // arr = arr.join("\n");
     // fs.writeFileSync("test.txt",arr);
-    // console.log(test);
+    // //console.log(test);
   });
   await wait();
   // arr = arr.join("\n");
-  // console.log(typeof (arr));
+  // //console.log(typeof (arr));
   return arr;
 }
 function hiddenWin() {
@@ -126,7 +126,7 @@ function hiddenWin() {
 
   // and load the index.html of the app.
   hiddenWindow.loadFile('form.html')
-  hiddenWindow.webContents.openDevTools();
+  // hiddenWindow.webContents.openDevTools();
 
 
   // Open the DevTools.
@@ -143,11 +143,11 @@ function hiddenWin() {
 
 exports.submit = function (result) {
   // test11();
-  // console.log(result)
+  // //console.log(result)
   exports.result = result
   hiddenWin();
-  // console.log(hiddenWindow.devToolsWebContents());
-  // console.log(hiddenWindow)
+  // //console.log(hiddenWindow.devToolsWebContents());
+  // //console.log(hiddenWindow)
   hiddenWindow.webContents.on('did-finish-load', () => {
     hiddenWindow.webContents.printToPDF({
       marginsType:2,
@@ -159,10 +159,10 @@ exports.submit = function (result) {
     }).then(data => {
       fs.writeFile(`${setting.savePath}${result.file_name}.pdf`, data, (err) => {
         if (err) throw err
-        console.log("write pdf")
+        //console.log("write pdf")
       })
     }).catch(err => {
-      console.log(err)
+      //console.log(err)
     })
   })
 }
