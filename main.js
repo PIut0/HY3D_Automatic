@@ -109,7 +109,7 @@ exports.pdfParsing = async function (pdfFile) {
   });
   await wait();
   // arr = arr.join("\n");
-  console.log(typeof (arr));
+  // console.log(typeof (arr));
   return arr;
 }
 function hiddenWin() {
@@ -143,7 +143,7 @@ function hiddenWin() {
 
 exports.submit = function (result) {
   // test11();
-  console.log(result)
+  // console.log(result)
   exports.result = result
   hiddenWin();
   // console.log(hiddenWindow.devToolsWebContents());
@@ -157,7 +157,7 @@ exports.submit = function (result) {
       }
       // pageSize: 'A3'
     }).then(data => {
-      fs.writeFile('./savefile/test5.pdf', data, (err) => {
+      fs.writeFile(`${setting.savePath}${result.file_name}.pdf`, data, (err) => {
         if (err) throw err
         console.log("write pdf")
       })
