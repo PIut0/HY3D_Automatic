@@ -14,6 +14,17 @@
     background-color: coral;
 }
 
+.setting{
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+.setting label{
+    padding: 15px;
+    background-color: coral;
+}
+
 .main_content{
     display: flex;
     width: 100%;

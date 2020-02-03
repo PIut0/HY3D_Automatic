@@ -3,7 +3,10 @@
     margin: 0px;
 }
 body{
-    padding: 40px 30px;
+    background-color: white;
+}
+#content{
+    padding: 80px 60px;
     width: 1200px;
 }
 .estimation{
@@ -59,6 +62,9 @@ body{
     padding-top: 25px;
     letter-spacing: 3px;
     font-size: 17px;
+}
+.div1 span{
+    letter-spacing: normal;
 }
 .sub_title{
     font-size: 18px;
