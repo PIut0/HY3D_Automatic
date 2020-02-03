@@ -30,6 +30,10 @@
         견적서 수정
       </div>
     </nav>
+    <nav class="setting">
+      <label for="xlPath">엑셀 파일</label>
+      <input type="file" id="xlPath" hidden>
+    </nav>
     <div class="main_content">
       <table class="input_content">
         <tr>
@@ -89,40 +93,26 @@
         <table class="more_info_table" border="1">
           <tr>
             <td>소요일자</td>
-            <td><input type="text" value="3"></td>
+            <td><input id="req_date" type="text" value="3"></td>
           </tr>
           <tr>
-            <td>배송여부</td>
-            <td><input type="text" value="3"></td>
+            <td>배송가격</td>
+            <td><input id="delivery_price" type="text" value="4000"></td>
           </tr>
         </table>
       </div>
+
+      
+
       <button id="submit">
         완료
       </button>
     </div>
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>
-    <script src="./js/pdfRead.js"></script>
-    <script src="./js/xlRead.js"></script>
-    <!-- <script>
-      $(document).ready(function (){
-        console.log("test");
-        var fileTarget = $('.upload-hidden');
-
-        fileTarget.on('change', function(){
-          if(window.FileReader){
-            var filename = $(this)[0].files[0].name;
-          }
-          else{
-            var filename = $(this).val().split('/').pop().split('\\').pop();
-          }
-
-          $(this).siblings('.upload-name').val(filename);
-        })
-
-      })
-    </script> -->
+    <!-- <script src="./js/pdfRead.js"></script> -->
+    <!-- <script src="./js/xlRead.js"></script> -->
+    <script src="./js/result.js"></script>
     <script src="./js/index.js"></script>
   </body>
 </html>
