@@ -96,7 +96,7 @@ const menuTemplate = [
           xlFile = dialog.showOpenDialogSync(mainWindow, {
             properties: ['openFile']
           })
-          setting.xlPath = xlFile[0]
+          setting.xlPath = xlFile[0].split("\\").join("/")
           fs.writeFileSync("setting.json",JSON.stringify(setting))
         }
       },
@@ -107,7 +107,7 @@ const menuTemplate = [
           pdfPath = dialog.showOpenDialogSync(mainWindow, {
             properties: ['openDirectory']
           })
-          setting.pdfPath = pdfPath[0]
+          setting.pdfPath = pdfPath[0].split("\\").join("/")
           fs.writeFileSync("setting.json",JSON.stringify(setting))
           // console.log(pdfPath)
         }
@@ -119,7 +119,7 @@ const menuTemplate = [
           savePath = dialog.showOpenDialogSync(mainWindow, {
             properties: ['openDirectory']
           })
-          setting.savePath = savePath[0]
+          setting.savePath = savePath[0].split("\\").join("/")
           fs.writeFileSync("setting.json",JSON.stringify(setting))
           // console.log(pdfPath)
         }
@@ -396,7 +396,7 @@ exports.submit = function (result) {
       }
       // pageSize: 'A3'
     }).then(data => {
-      fs.writeFile(`${setting.savePath}${result.file_name}.pdf`, data, (err) => {
+      fs.writeFile(`${setting.savePath}/${result.file_name}.pdf`, data, (err) => {
         if (err) throw err
         //console.log("write pdf")
       })
