@@ -3,7 +3,7 @@ const fs = require('fs')
 const main = remote.require('./main.js')
 
 
-console.log(main.result)
+//console.log(main.result)
 
 let est_time = main.result.est_time
 let file_name = main.result.file_name
@@ -112,7 +112,7 @@ dom_machine_t.innerHTML = `${machine_t.money()}원/시간`
 function printing_func(){
     var sum = 0;
     for(var i=0;i<part_weight.length+1;i++){
-        console.log(part_weight.length)
+        //console.log(part_weight.length)
         if(i == part_weight.length){
             let addPart = document.createElement("tr")
             let no = document.createElement("td")
@@ -162,9 +162,9 @@ function printing_func(){
             let span1 = document.createElement("span")
             span1.style="float: right;"
             span1.appendChild(document.createTextNode((est_time*machine_t).money()))
-            console.log(est_time)
-            console.log(machine_t)
-            console.log(machine_t*est_time)
+            //console.log(est_time)
+            //console.log(machine_t)
+            //console.log(machine_t*est_time)
             date_price.appendChild(span1)
 
             weight.appendChild(document.createTextNode(part_weight[i]))
@@ -232,7 +232,7 @@ function printing_func(){
     sum += est_time*machine_t
     document.getElementById("sum_price").innerHTML = sum.money()
     document.getElementById("sum_price2").innerHTML = sum.money()
-    console.log(sum)
+    //console.log(sum)
     
     return sum
 }
@@ -286,7 +286,7 @@ dom_today.innerHTML = `${today.getFullYear()}년 ${today.getMonth()+1}월 ${toda
 
 
 let string = new XMLSerializer().serializeToString(document);
-fs.writeFileSync(`./savefile/${file_name}.html`,string)
+fs.writeFileSync(`./savefile/htmlsave/${file_name}.html`,string)
 
 
 // var element = document.getElementById("content");

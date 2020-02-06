@@ -11,7 +11,7 @@ submit_bt.addEventListener("click",submit_func,false)
 
 async function submit_func(){
     let est_time = document.getElementById("time").value
-    console.log(est_time)
+    //console.log(est_time)
     let xlresult = await xlread.result_func()
     let part_weight = pdfread.part_weight;
     let part_name = pdfread.part_name;
@@ -22,15 +22,15 @@ async function submit_func(){
     for(var i=0;i<part_weight.length;i++){
         part_num.push(parseInt(document.getElementById(`part_${i}`).value))
     }
-    console.log(file_name)
+    //console.log(file_name)
 
     if(est_time == "")   est_time = 0
     if(file_name == undefined)  file_name = "file_name"
-    // console.log(result)
-    console.log("result")
-    console.log(xlresult)
-    console.log(part_weight)
-    console.log(part_num)
+    // //console.log(result)
+    //console.log("result")
+    //console.log(xlresult)
+    //console.log(part_weight)
+    //console.log(part_num)
 
     let result = new Object
     result["est_time"] = parseInt(est_time)
@@ -41,6 +41,6 @@ async function submit_func(){
     result["part_name"] = part_name
     result["part_num"] = part_num
     result["xlresult"] = xlresult
-    console.log(result)
+    //console.log(result)
     main.submit(result)
 }
