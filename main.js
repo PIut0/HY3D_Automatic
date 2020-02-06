@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, webContents } = require('electron')
+const { app, BrowserWindow, webContents, Menu, dialog } = require('electron')
 const path = require('path')
 const pdf = require('pdf-parse')
 const fs = require('fs')
@@ -30,7 +30,7 @@ function createWindow() {
 
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -43,6 +43,245 @@ function createWindow() {
     mainWindow = null
   })
 }
+
+// const menuTemplate = [
+//   {
+//     label: '설정',
+//     submenu: [
+//       {role: '엑셀 파일'},
+//       {role: 'PDF 경로'},
+//       {role: '저장 경로'}
+//     ]
+//   }
+// ]
+
+const menuTemplate = [
+  {
+    label: '편집',
+    submenu: [
+      {
+        role: 'undo'
+      },
+      {
+        role: 'redo'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        role: 'cut'
+      },
+      {
+        role: 'copy'
+      },
+      {
+        role: 'paste'
+      },
+      {
+        role: 'pasteandmatchstyle'
+      },
+      {
+        role: 'delete'
+      },
+      {
+        role: 'selectall'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: '엑셀 파일',
+        id: 'excel_setting',
+        click() {
+          xlFile = dialog.showOpenDialogSync(mainWindow, {
+            properties: ['openFile']
+          })
+          setting.xlPath = xlFile[0]
+          fs.writeFileSync("setting.json",JSON.stringify(setting))
+        }
+      },
+      {
+        label: 'PDF 경로',
+        id: 'pdf_setting',
+        click() {
+          pdfPath = dialog.showOpenDialogSync(mainWindow, {
+            properties: ['openDirectory']
+          })
+          setting.pdfPath = pdfPath[0]
+          fs.writeFileSync("setting.json",JSON.stringify(setting))
+          // console.log(pdfPath)
+        }
+      },
+      {
+        label: '저장 경로',
+        id: 'save_setting',
+        click() {
+          savePath = dialog.showOpenDialogSync(mainWindow, {
+            properties: ['openDirectory']
+          })
+          setting.savePath = savePath[0]
+          fs.writeFileSync("setting.json",JSON.stringify(setting))
+          // console.log(pdfPath)
+        }
+      },
+    ]
+  },
+  {
+    label: '보기',
+    submenu: [
+      {
+        label: 'Reload',
+        accelerator: 'CmdOrCtrl+R',
+        click (item, focusedWindow) {
+          if (focusedWindow) focusedWindow.reload()
+        }
+      },
+      {
+        label: 'Toggle Developer Tools',
+        accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
+        click (item, focusedWindow) {
+          if (focusedWindow) focusedWindow.webContents.toggleDevTools()
+        }
+      },
+      {
+        type: 'separator'
+      },
+      {
+        role: 'resetzoom'
+      },
+      {
+        role: 'zoomin'
+      },
+      {
+        role: 'zoomout'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        role: 'togglefullscreen'
+      }
+    ]
+  },
+  {
+    role: 'window',
+    submenu: [
+      {
+        role: 'minimize'
+      },
+      {
+        role: 'close'
+      }
+    ]
+  },
+]
+
+if (process.platform === 'darwin') {
+  menuTemplate.unshift({
+    label: app.getName(),
+    submenu: [
+      {
+        role: 'about'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        role: 'services',
+        submenu: []
+      },
+      {
+        type: 'separator'
+      },
+      {
+        role: 'hide'
+      },
+      {
+        role: 'hideothers'
+      },
+      {
+        role: 'unhide'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        role: 'quit'
+      }
+    ]
+  })
+  // Edit menu.
+  menuTemplate[1].submenu.push(
+    {
+      type: 'separator'
+    },
+    {
+      label: 'Speech',
+      submenu: [
+        {
+          role: 'startspeaking'
+        },
+        {
+          role: 'stopspeaking'
+        }
+      ]
+    }
+  )
+  // Window menu.
+  menuTemplate[3].submenu = [
+    {
+      label: 'Close',
+      accelerator: 'CmdOrCtrl+W',
+      role: 'close'
+    },
+    {
+      label: 'Minimize',
+      accelerator: 'CmdOrCtrl+M',
+      role: 'minimize'
+    },
+    {
+      label: 'Zoom',
+      role: 'zoom'
+    },
+    {
+      type: 'separator'
+    },
+    {
+      label: 'Bring All to Front',
+      role: 'front'
+    }
+  ]
+}
+
+// const menuTemplate = [
+//   {
+//     label: '설정',
+//     submenu: [
+//       {
+//         label: '엑셀 파일',
+//         id: 'excel_setting'
+//         ,click() {
+//           xlFile = dialog.showOpenDialogSync(mainWindow, {
+//             properties: ['openFile']
+//           })
+//           setting.xlFile = xlFile
+//         }
+//       },
+//       {
+//         label: 'PDF 경로',
+//         id: 'pdf_setting'
+//       },
+//       {
+//         label: '저장 경로',
+//         id: 'save_setting'
+//       },
+//     ]
+//   },
+// ]
+
+
+const menu = Menu.buildFromTemplate(menuTemplate)
+Menu.setApplicationMenu(menu)
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
