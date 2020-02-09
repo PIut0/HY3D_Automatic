@@ -5,7 +5,6 @@ const pdf = require('pdf-parse')
 const fs = require('fs')
 const iconv = require('iconv-lite')
 const jschar = require('jschardet')
-const utf8 = require('utf8')
 
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -325,10 +324,8 @@ exports.pdfParsing = async function (pdfFile) {
     var text = data.text;
     var test = jschar.detect(text);
     text = iconv.encode(text, "utf-8").toString();
-    var lst = text;
     text = text.split("\n");
-    fs.writeFileSync("test.txt", text)
-    arr.push(text[2])
+    // fs.writeFileSync("test.txt", text)
     for (var i = 0; i < text.length; i++) {
       var line = text[i];
       var next = line.indexOf("x");
@@ -351,6 +348,38 @@ exports.pdfParsing = async function (pdfFile) {
   // //console.log(typeof (arr));
   return arr;
 }
+
+
+exports.mod_pdfParsing = async function (pdfFile) {
+  var arr
+  dataBuffer = pdfFile;
+  dataBuffer = fs.readFileSync(dataBuffer);
+  pdf(dataBuffer).then(function (data) {
+    //console.log('Start');
+    var text = data.text;
+    var test = jschar.detect(text);
+    text = iconv.encode(text, "utf-8").toString();
+    fs.writeFileSync("test.txt", text)
+    text = text.split("\n");
+    for (var i = 0; i < text.length; i++) {
+      var line = text[i];
+      if(line.indexOf("[id]") != -1){
+        arr = line.split("[id]")[1]
+      }
+    }
+    // //console.log(text.toString());
+    //console.log('End');
+    // arr = arr.join("\n");
+    // fs.writeFileSync("test.txt",arr);
+    // //console.log(test);
+      console.log(arr)
+  });
+  await wait();
+  // arr = arr.join("\n");
+  // //console.log(typeof (arr));
+  return arr;
+}
+
 function hiddenWin() {
   hiddenWindow = new BrowserWindow({
     width: 800,
@@ -393,7 +422,8 @@ exports.submit = function (result) {
       pageSize: {
         width: 250000,
         height: 380000
-      }
+      },
+      printBackground: true
       // pageSize: 'A3'
     }).then(data => {
       fs.writeFile(`${setting.savePath}/${result.file_name}.pdf`, data, (err) => {

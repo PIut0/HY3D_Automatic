@@ -12,6 +12,22 @@ let delivery_price = main.result.delivery_price
 let part_weight = main.result.part_weight
 let part_name = main.result.part_name
 let part_num = main.result.part_num
+
+let modeling = main.result.modeling
+let modeling_res = main.result.modeling_res
+let modeling_date = main.result.modeling_date
+let modeling_price2 = main.result.modeling_price
+
+let painting = main.result.painting
+let painting_num = main.result.painting_num
+let painting_price2 = main.result.painting_price
+
+console.log(part_weight)
+
+
+if(modeling_price2 == "")    modeling_price2="0"
+if(painting_price2 == "")    painting_price2="0"
+
 let xlresult = main.result.xlresult
 
 let machine = xlresult[0]
@@ -68,7 +84,15 @@ let dom_result_price = document.getElementById("result_price2")
 let dom_req_date = document.getElementById("req_date")
 
 let dom_make_modeling_table = document.getElementById("make_modeling_table")
+let dom_modeling = document.getElementById("modeling")
+let dom_modeling_res = document.getElementById("modeling_res")
+let dom_modeling_date = document.getElementById("modeling_date")
+let dom_modeling_price = document.getElementById("modeling_price")
+let dom_modeling_result_price = document.getElementById("modeling_result_price")
+let dom_modeling_result_price2 = document.getElementById("modeling_result_price2")
+
 let dom_make_printing_table = document.getElementById("make_printing_table")
+
 
 let dom_model = document.getElementById("model")
 let dom_model_g = document.getElementById("model_g")
@@ -76,6 +100,13 @@ let dom_machine = document.getElementById("machine")
 let dom_machine_t = document.getElementById("machine_t")
 
 let dom_painting_table = document.getElementById("painting_table")
+let dom_painting = document.getElementById("painting")
+let dom_painting_num = document.getElementById("painting_num")
+let dom_painting_price = document.getElementById("painting_price")
+let dom_painting_result_price = document.getElementById("painting_result_price")
+let dom_painting_result_price2 = document.getElementById("painting_result_price2")
+
+
 let dom_delivery_table = document.getElementById("delivery_table")
 
 let dom_delivery_price = document.getElementById("delivery_price")
@@ -92,10 +123,10 @@ let table_vat = document.getElementById("vat")
 let table_result_price = document.getElementById("result_price")
 
 let dom_today = document.getElementById("today")
+let pairing_id = document.getElementById("pairing_id")
 
 
-
-dom_group_name.innerHTML = `<p>${xlresult[2]} ${xlresult[1]}</p>`
+dom_group_name.innerHTML = `<p>${xlresult[2]}</p>`
 dom_item_name.innerHTML = `${xlresult[3]} 제작`
 dom_item_name2.innerHTML = `${xlresult[3]} 제작`
 dom_item_name3.innerHTML = `${xlresult[3]}`
@@ -108,6 +139,21 @@ dom_model.innerHTML = `${model}`
 dom_model_g.innerHTML = `${model_g}원/g`
 dom_machine.innerHTML = `${machine}`
 dom_machine_t.innerHTML = `${machine_t.money()}원/시간`
+
+dom_modeling.innerHTML = `${modeling}`
+dom_modeling_res.innerHTML = `${modeling_res}`
+dom_modeling_date.innerHTML = `${modeling_date}`
+dom_modeling_price.innerHTML = `${modeling_price2.money()}`
+dom_modeling_result_price.innerHTML = `${modeling_price2.money()}`
+dom_modeling_result_price2.innerHTML = `${modeling_price2.money()}`
+
+
+dom_painting.innerHTML = `${painting}`
+dom_painting_num.innerHTML = `${painting_num}`
+dom_painting_price.innerHTML = `${painting_price2.money()}`
+dom_painting_result_price.innerHTML = `${(parseInt(painting_price2)*parseInt(painting_num)).money()}`
+dom_painting_result_price2.innerHTML = `${(parseInt(painting_price2)*parseInt(painting_num)).money()}`
+
 
 function printing_func(){
     var sum = 0;
@@ -148,6 +194,13 @@ function printing_func(){
             let sum_price = document.createElement("td")
 
             date.rowSpan=part_weight.length
+            date.id = "make_time"
+            // name.id = `part_name${i}`
+            // weight.id = `part_weight${i}`
+            // num.id = `part_num${i}`
+            name.classList.add('part_name')
+            weight.classList.add('part_weight')
+            num.classList.add('part_num')
             date_price.rowSpan=part_weight.length
             sum_price.rowSpan=part_weight.length
             date_price.className="left_td"
@@ -205,6 +258,12 @@ function printing_func(){
             let weight = document.createElement("td")
             let num = document.createElement("td")
             let price = document.createElement("td")
+            // name.id = `part_name${i}`
+            // weight.id = `part_weight${i}`
+            // num.id = `part_num${i}`
+            name.classList.add('part_name')
+            weight.classList.add('part_weight')
+            num.classList.add('part_num')
             price.className="left_td"
             
             no.appendChild(document.createTextNode(i+1))
@@ -256,9 +315,11 @@ function money2kr(num) {
 }
 
 
-let modeling_price = 0;
+
+if(painting_num == "")    painting_num="0"
+let modeling_price = parseInt(modeling_price2);
 let printing_price = printing_func()
-let painting_price = 0;
+let painting_price = parseInt(painting_price2)*parseInt(painting_num);
 
 dom_delivery_price.innerHTML = delivery_price.money()
 dom_delivery_price2.innerHTML = delivery_price.money()
@@ -282,11 +343,22 @@ dom_result_price.innerHTML = `${money2kr(last_price)} ( ₩${last_price.money()}
 
 var today = new Date()
 
+var year = today.getFullYear()
+var month = today.getMonth()+1
+var date = today.getDate()
+
+month = month + ""
+date = date + ""
+if(month.length == 1)   month = "0"+month
+if(date.length == 1)   date = "0"+date
+
 dom_today.innerHTML = `${today.getFullYear()}년 ${today.getMonth()+1}월 ${today.getDate()}일`
 
-
+var rand = Math.random()*10
+let pairing = `${year}${month}${date}_${xlresult[3]}_${xlresult[2]}_${last_price.money()}_${rand}`
+pairing_id.innerHTML = `[id]${pairing}[id]`
 let string = new XMLSerializer().serializeToString(document);
-fs.writeFileSync(`./savefile/htmlsave/${file_name}.html`,string)
+fs.writeFileSync(`./savefile/htmlsave/${pairing}.html`,string)
 
 
 // var element = document.getElementById("content");

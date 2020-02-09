@@ -1,5 +1,5 @@
-const xlread = require("./js/xlRead")
-const pdfread = require("./js/pdfRead")
+const xlread = require("./js/mod_xlRead")
+const pdfread = require("./js/mod_pdfRead")
 const remote = require('electron').remote
 // const fs = require('fs')
 const main = remote.require('./main.js')
@@ -67,5 +67,5 @@ async function submit_func(){
     result["painting_price"] = painting_price
     //console.log(result)
     main.submit(result)
-    alert("작성 완료")
+    alert("수정 완료")
 }

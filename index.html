@@ -23,12 +23,16 @@
 
   <body>
     <nav class="nav_bar">
-      <div id="est_make">
-        견적서 작성
-      </div>
-      <div id="est_modify">
-        견적서 수정
-      </div>
+      <a href="#" class="thispage">
+        <div id="est_make">
+          견적서 작성
+        </div>
+      </a>
+      <a href="./modify.html">
+        <div id="est_modify">
+          견적서 수정
+        </div>
+      </a>
     </nav>
     <!-- <nav class="setting">
       <label for="xlPath">엑셀 파일</label>
@@ -49,6 +53,7 @@
           <td>
             <input class="upload-name" id="upload-name-id" value="파일선택" disabled="disabled" type="text">
             <label for="pdfFile">업로드</label>
+            <label id="recently">최근파일</label>
             <input type="file" id="pdfFile" class="upload-hidden">
           </td>
         </tr>
@@ -85,6 +90,8 @@
         <input class="upload-name" value="파일선택" disabled="disabled" type="text">
         <label for="ex_filename">업로드</label>
         <input type="file" id="ex_filename" class="upload-hidden">
+        피드백 인력
+        
       </div>
       <div class="row_content">
         <h1>Excel No.</h1>
@@ -106,6 +113,38 @@
             <td><input id="delivery_price" type="text" value="4000"></td>
           </tr>
         </table>
+        <table class="more_info_table" border="1">
+          <th colspan="4">
+            모델링
+          </th>
+          <tr>
+            <td>내역</td>
+            <td>담당자</td>
+            <td>소요일자</td>
+            <td>단가</td>
+          </tr>
+          <tr>
+            <td><input id="modeling" type="text" value=""></td>
+            <td><input id="modeling_res" type="text" value=""></td>
+            <td><input id="modeling_date" type="text" value=""></td>
+            <td><input id="modeling_price" type="text" value=""></td>
+          </tr>
+        </table>
+        <table class="more_info_table" border="1">
+          <th colspan="3">
+            도색
+          </th>
+          <tr>
+            <td>내역</td>
+            <td>수량</td>
+            <td>단가</td>
+          </tr>
+          <tr>
+            <td><input id="painting" type="text" value=""></td>
+            <td><input id="painting_num" type="text" value=""></td>
+            <td><input id="painting_price" type="text" value=""></td>
+          </tr>
+        </table>
       </div>
 
       
@@ -120,6 +159,7 @@
     <!-- <script src="./js/xlRead.js"></script> -->
     <script src="./js/result.js"></script>
     <script src="./js/index.js"></script>
+    <!-- <script src="./js/gethtml.js"></script> -->
   </body>
 </html>
 

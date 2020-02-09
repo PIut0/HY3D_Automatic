@@ -74,21 +74,21 @@
                   <td width="100px">No.</td>
                   <td >내역</td>
                   <td width="120px">담당자</td>
-                  <td width="120px">소요일</td>
-                  <td width="120px">단가(원)</td>
+                  <td width="120px" >소요일</td>
+                  <td width="120px" >단가(원)</td>
                   <td width="125px">금액(원)</td>
                 </tr>
                 <tr>
                   <td>1</td>
-                  <td style="text-align: left;padding-left: 5px;"></td>
-                  <td></td>
-                  <td></td>
-                  <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-                  <td class="left_td"> ₩ <span style="float: right;">-</span></td>
+                  <td style="text-align: left;padding-left: 5px;" id="modeling"></td>
+                  <td id="modeling_res"></td>
+                  <td id="modeling_date"></td>
+                  <td class="left_td"> ₩ <span style="float: right;" id="modeling_price">-</span></td>
+                  <td class="left_td"> ₩ <span style="float: right;" id="modeling_result_price">-</span></td>
                 </tr>
                 <tr>
                   <td colspan="5">소계</td>
-                  <td class="left_td"> ₩ <span style="float: right;">-</span></td>
+                  <td class="left_td"> ₩ <span style="float: right;" id="modeling_result_price2">-</span></td>
                 </tr>
             </table>
     
@@ -188,14 +188,14 @@
                 </tr>
                 <tr>
                   <td>1</td>
-                  <td style="text-align: left;padding-left: 5px;"></td>
-                  <td></td>
-                  <td class="left_td"> ₩ <span style="float: right;">-</span></td>
-                  <td class="left_td"> ₩ <span style="float: right;">-</span></td>
+                  <td id="painting" style="text-align: left;padding-left: 5px;"></td>
+                  <td id="painting_num"></td>
+                  <td class="left_td"> ₩ <span id="painting_price" style="float: right;">-</span></td>
+                  <td class="left_td"> ₩ <span id="painting_result_price" style="float: right;">-</span></td>
                 </tr>
                 <tr>
                   <td colspan="4">소계</td>
-                  <td class="left_td"> ₩ <span style="float: right;">-</span></td>
+                <td class="left_td"> ₩ <span id="painting_result_price2" style="float: right;">-</span></td>
                 </tr>
             </table>
     
@@ -283,6 +283,7 @@
     
             <p class="date">견적일자 : <span id="today"></span><br>이상</p>
         </div>
+        <div id="pairing_id" style="color: white;"></div>
 <!-- 
         <br><br>
         <br><br>

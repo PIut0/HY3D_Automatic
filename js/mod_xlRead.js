@@ -36,6 +36,7 @@ exports.result_func = function(){
     // console.log(id)
     
     let result = []
+    console.log(work_sheet['L'+String(id)].v)
     let x_machine
     let x_name
     let x_group
