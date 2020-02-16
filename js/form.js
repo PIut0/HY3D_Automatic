@@ -6,8 +6,9 @@ const main = remote.require('./main.js')
 //console.log(main.result)
 
 let est_time = main.result.est_time
-let file_name = main.result.file_name
+// let file_name = main.result.file_name
 let req_date = main.result.req_date
+let delivery_num = main.result.delivery_num
 let delivery_price = main.result.delivery_price
 let part_weight = main.result.part_weight
 let part_name = main.result.part_name
@@ -21,6 +22,11 @@ let modeling_price2 = main.result.modeling_price
 let painting = main.result.painting
 let painting_num = main.result.painting_num
 let painting_price2 = main.result.painting_price
+let property = main.result.property
+
+let xl_num = main.result.xl_num
+
+console.log(main.result)
 
 console.log(part_weight)
 
@@ -109,6 +115,7 @@ let dom_painting_result_price2 = document.getElementById("painting_result_price2
 
 let dom_delivery_table = document.getElementById("delivery_table")
 
+let dom_delivery_num = document.getElementById("delivery_num")
 let dom_delivery_price = document.getElementById("delivery_price")
 let dom_delivery_price2 = document.getElementById("delivery_price2")
 let dom_delivery_price3 = document.getElementById("delivery_price3")
@@ -127,32 +134,45 @@ let pairing_id = document.getElementById("pairing_id")
 
 
 dom_group_name.innerHTML = `<p>${xlresult[2]}</p>`
-dom_item_name.innerHTML = `${xlresult[3]} 제작`
-dom_item_name2.innerHTML = `${xlresult[3]} 제작`
-dom_item_name3.innerHTML = `${xlresult[3]}`
-dom_item_name4.innerHTML = `${xlresult[3]} 제작`
+dom_item_name.innerHTML = `${xlresult[3]} ${property}`
+dom_item_name2.innerHTML = `${xlresult[3]} ${property}`
+dom_item_name4.innerHTML = `${xlresult[3]} ${property}`
 dom_result_price.innerHTML = `(합계금액)`
 dom_req_date.innerHTML = `${req_date}일`
-
-
-dom_model.innerHTML = `${model}`
-dom_model_g.innerHTML = `${model_g}원/g`
-dom_machine.innerHTML = `${machine}`
-dom_machine_t.innerHTML = `${machine_t.money()}원/시간`
 
 dom_modeling.innerHTML = `${modeling}`
 dom_modeling_res.innerHTML = `${modeling_res}`
 dom_modeling_date.innerHTML = `${modeling_date}`
 dom_modeling_price.innerHTML = `${modeling_price2.money()}`
-dom_modeling_result_price.innerHTML = `${modeling_price2.money()}`
-dom_modeling_result_price2.innerHTML = `${modeling_price2.money()}`
-
 
 dom_painting.innerHTML = `${painting}`
 dom_painting_num.innerHTML = `${painting_num}`
 dom_painting_price.innerHTML = `${painting_price2.money()}`
-dom_painting_result_price.innerHTML = `${(parseInt(painting_price2)*parseInt(painting_num)).money()}`
-dom_painting_result_price2.innerHTML = `${(parseInt(painting_price2)*parseInt(painting_num)).money()}`
+
+
+painting_num = parseInt(painting_num)
+modeling_date = parseInt(modeling_date)
+delivery_num = parseInt(delivery_num)
+
+if(isNaN(painting_num))    painting_num=0
+if(isNaN(modeling_date))    modeling_date=0
+if(isNaN(delivery_num))    delivery_num=0
+
+
+let modeling_price = parseInt(modeling_price2)*parseInt(modeling_date);
+let printing_price = printing_func()
+let painting_price = parseInt(painting_price2)*parseInt(painting_num);
+
+dom_model.innerHTML = `${model}`
+dom_model_g.innerHTML = `${model_g.money()}원/g`
+dom_machine.innerHTML = `${machine}`
+dom_machine_t.innerHTML = `${machine_t.money()}원/시간`
+
+dom_modeling_result_price.innerHTML = `${modeling_price.money()}`
+dom_modeling_result_price2.innerHTML = `${modeling_price.money()}`
+
+dom_painting_result_price.innerHTML = `${painting_price.money()}`
+dom_painting_result_price2.innerHTML = `${painting_price.money()}`
 
 
 function printing_func(){
@@ -315,22 +335,26 @@ function money2kr(num) {
 }
 
 
-
-if(painting_num == "")    painting_num="0"
-let modeling_price = parseInt(modeling_price2);
-let printing_price = printing_func()
-let painting_price = parseInt(painting_price2)*parseInt(painting_num);
-
-dom_delivery_price.innerHTML = delivery_price.money()
-dom_delivery_price2.innerHTML = delivery_price.money()
-dom_delivery_price3.innerHTML = delivery_price.money()
+let delivery_price2 = delivery_price * delivery_num;
+if(delivery_num != 0){
+    dom_item_name3.innerHTML = `${xlresult[3]}`
+    dom_delivery_num.innerHTML = delivery_num
+    dom_delivery_price.innerHTML = delivery_price.money()
+    dom_delivery_price2.innerHTML = delivery_price2.money()
+    dom_delivery_price3.innerHTML = delivery_price2.money()
+}
 
 table_result_modeling.innerHTML = modeling_price.money()
 table_result_printing.innerHTML = printing_price.money()
 table_result_painting.innerHTML = painting_price.money()
-table_result_delivery.innerHTML = delivery_price.money()
+table_result_delivery.innerHTML = delivery_price2.money()
 
-let result_sum = modeling_price + printing_price + painting_price + delivery_price
+console.log(modeling_price)
+console.log(printing_price)
+console.log(painting_price)
+console.log(delivery_price2)
+
+let result_sum = modeling_price + printing_price + painting_price + delivery_price2
 
 table_sum_price.innerHTML = result_sum.money()
 table_sum.innerHTML = result_sum.money()
@@ -355,10 +379,10 @@ if(date.length == 1)   date = "0"+date
 dom_today.innerHTML = `${today.getFullYear()}년 ${today.getMonth()+1}월 ${today.getDate()}일`
 
 var rand = Math.random()*10
-let pairing = `${year}${month}${date}_${xlresult[3]}_${xlresult[2]}_${last_price.money()}_${rand}`
+let pairing = `${year}${month}${date}_${xlresult[3]}_${xlresult[2]}_${last_price.money()}_${rand}_${xl_num}`
 pairing_id.innerHTML = `[id]${pairing}[id]`
 let string = new XMLSerializer().serializeToString(document);
-fs.writeFileSync(`./savefile/htmlsave/${pairing}.html`,string)
+fs.writeFileSync(`${__dirname}/savefile/htmlsave/${pairing}.html`,string)
 
 
 // var element = document.getElementById("content");

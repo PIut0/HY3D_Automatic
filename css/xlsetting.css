@@ -1,0 +1,9 @@
+*{
+    margin: auto;
+    text-align: center;
+}
+#submit{
+    font-size: 17px;
+    padding: 3px 20px;
+    margin-top: 10px;
+}

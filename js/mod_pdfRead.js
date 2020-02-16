@@ -18,7 +18,8 @@ exports.part_weight = part_weight;
 exports.part_name = part_name;
 
 function changeFile(){
-	part_weight = []
+    part_weight = []
+    part_name = []
     const pdfFile = this.files[0];
     document.getElementById('upload-name-id').value = pdfFile.name;
 
@@ -29,7 +30,7 @@ function changeFile(){
 }
 
 async function handleFiles(dataBuffer) {
-	console.log(dataBuffer);
+	// console.log(dataBuffer);
 
     var data = await main.mod_pdfParsing(dataBuffer);
     gethtml_func(data)
@@ -56,6 +57,9 @@ async function handleFiles(dataBuffer) {
 function gethtml_func(input){
     // input = input[2]+"_"+input[1]+"_"+input[0]
     let path = `${__dirname}/../savefile/htmlsave/${input}.html`
+    let xl_num = input.split('_')
+    xl_num = xl_num[xl_num.length-1]
+    // console.log(xl_num)
     
     let html = fs.readFileSync(path)
     html = iconv.encode(html, "utf-8").toString();
@@ -65,14 +69,18 @@ function gethtml_func(input){
     let result = []
     
     let date = parseInt(parse('#req_date').text().slice(0,-1))
+    let delivery_num = parseInt(parse('#delivery_num').text())
     let delivery_price = parseInt(parse('#delivery_price').text().split(",").join(""))
     let make_time = parseInt(parse('#make_time').text())
     let parse_part_name = parse(".part_name")
     let parse_part_weight = parse(".part_weight")
     let parse_part_num = parse(".part_num")
+    let parse_item_name = parse("#item_name").text()
+    parse_item_name = parse_item_name.split(" ")
+    parse_item_name = parse_item_name[parse_item_name.length-1]
+    console.log(parse_item_name)
     
     let part_num = []
-    
     
     for(var i=0;i<parse_part_name.length;i++){
         part_name.push(parse_part_name[i].children[0].data)
@@ -82,7 +90,7 @@ function gethtml_func(input){
     
     exports.part_weight = part_weight;
 	exports.part_name = part_name;
-	console.log(part_name)
+	// console.log(part_name)
 
     let modeling = []
     modeling["modeling"] = parse('#modeling').text()
@@ -98,15 +106,20 @@ function gethtml_func(input){
 	if(isNaN(modeling["modeling_price"]))	modeling["modeling_price"] = ""
 	if(isNaN(painting["painting_price"]))	painting["painting_price"] = ""
 	if(isNaN(delivery_price))	delivery_price = ""
+	if(isNaN(delivery_num))	delivery_num = ""
+	if(isNaN(make_time))	make_time = ""
 
     result["date"] = date
     result["delivery_price"] = delivery_price
+    result["delivery_num"] = delivery_num
     result["make_time"] = make_time
     // result["part_name"] = part_name
     // result["part_weight"] = part_weight
     result["part_num"] = part_num
     result["modeling"] = modeling
     result["painting"] = painting
+    result["xl_num"] = xl_num
+    result["property"] = parse_item_name
     
     applyhtml(result)
 }
@@ -114,17 +127,26 @@ function gethtml_func(input){
 function applyhtml(result){
 
 	let date = result.date
-	let delivery_price = result.delivery_price
+    let delivery_price = result.delivery_price
+    let delivery_num = result.delivery_num
 	let make_time = result.make_time
 	let part_num = result.part_num
 	// let part_weight = result.part_weight
 	// let part_name = result.part_name
 	let modeling = result.modeling
-	let painting = result.painting
+    let painting = result.painting
+    let xl_num = result.xl_num
+    let property = result.property
 
 	document.getElementById("time").value = make_time
 	document.getElementById("req_date").value = date
 	document.getElementById("delivery_price").value = delivery_price
+    document.getElementById("delivery_num").value = delivery_num
+    
+    document.querySelectorAll("option").forEach(function(val){
+        if(val.value == property)   val.selected = true
+        else    val.selected = false
+    });
 
     let remove_table = document.querySelectorAll('.part_content tr');
     for(var i=1;i<remove_table.length;i++){
@@ -154,5 +176,7 @@ function applyhtml(result){
 	
 	document.getElementById("painting").value = painting["painting"]
 	document.getElementById("painting_num").value = painting["painting_num"]
-	document.getElementById("painting_price").value = painting["painting_price"]
+    document.getElementById("painting_price").value = painting["painting_price"]
+    
+    document.getElementById("excel_no").value = xl_num
 }

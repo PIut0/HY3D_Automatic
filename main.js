@@ -11,6 +11,7 @@ const jschar = require('jschardet')
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 let hiddenWindow
+let xlsettingWindow
 
 let setting = JSON.parse(fs.readFileSync("setting.json",'utf8'))
 exports.setting = setting
@@ -40,6 +41,21 @@ function createWindow() {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null
+  })
+}
+
+function xlsettingWin(){
+  xlsettingWindow = new BrowserWindow({
+    width: 500,
+    height: 120,
+    webPreferences: {
+      nodeIntegration: true
+    }
+  })
+
+  xlsettingWindow.loadFile('xlsetting.html')
+  xlsettingWindow.on('closed',function(){
+    xlsettingWindow = null
   })
 }
 
@@ -121,6 +137,13 @@ const menuTemplate = [
           setting.savePath = savePath[0].split("\\").join("/")
           fs.writeFileSync("setting.json",JSON.stringify(setting))
           // console.log(pdfPath)
+        }
+      },
+      {
+        label: '엑셀 설정',
+        id: 'xl_setting',
+        click() {
+          xlsettingWin();
         }
       },
     ]
@@ -354,10 +377,12 @@ exports.mod_pdfParsing = async function (pdfFile) {
   var arr
   dataBuffer = pdfFile;
   dataBuffer = fs.readFileSync(dataBuffer);
+  // console.log(dataBuffer)
   pdf(dataBuffer).then(function (data) {
-    //console.log('Start');
+    // console.log('Start');
     var text = data.text;
-    var test = jschar.detect(text);
+    // console.log(text)
+    // var test = jschar.detect(text);
     text = iconv.encode(text, "utf-8").toString();
     fs.writeFileSync("test.txt", text)
     text = text.split("\n");
@@ -367,12 +392,12 @@ exports.mod_pdfParsing = async function (pdfFile) {
         arr = line.split("[id]")[1]
       }
     }
-    // //console.log(text.toString());
-    //console.log('End');
+    //console.log(text.toString());
+    // console.log('End');
     // arr = arr.join("\n");
     // fs.writeFileSync("test.txt",arr);
-    // //console.log(test);
-      console.log(arr)
+    // console.log(test);
+    // console.log(arr)
   });
   await wait();
   // arr = arr.join("\n");
@@ -401,12 +426,9 @@ function hiddenWin() {
   // hiddenWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
-  hiddenWindow.on('closed', function () {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    hiddenWindow = null
-  })
+  // hiddenWindow.on('closed', function () {
+  //   hiddenWindow = null
+  // })
 }
 
 exports.submit = function (result) {
@@ -414,6 +436,7 @@ exports.submit = function (result) {
   // //console.log(result)
   exports.result = result
   hiddenWin();
+  // console.log(fs.existsSync(`${setting.savePath}/${result.file_name}.pdf`))
   // //console.log(hiddenWindow.devToolsWebContents());
   // //console.log(hiddenWindow)
   hiddenWindow.webContents.on('did-finish-load', () => {
@@ -426,12 +449,29 @@ exports.submit = function (result) {
       printBackground: true
       // pageSize: 'A3'
     }).then(data => {
-      fs.writeFile(`${setting.savePath}/${result.file_name}.pdf`, data, (err) => {
-        if (err) throw err
-        //console.log("write pdf")
-      })
+      if(fs.existsSync(`${setting.savePath}/${result.file_name}.pdf`)){
+        let n = 1;
+        while(fs.existsSync(`${setting.savePath}/${result.file_name}(${n}).pdf`)) n++;
+        fs.writeFile(`${setting.savePath}/${result.file_name}(${n}).pdf`, data, (err) => {
+          if (err) throw err
+          //console.log("write pdf")
+        })
+      }else{
+        fs.writeFile(`${setting.savePath}/${result.file_name}.pdf`, data, (err) => {
+          if (err) throw err
+          //console.log("write pdf")
+        })
+      }
     }).catch(err => {
       //console.log(err)
     })
   })
+  setTimeout(() => {
+    hiddenWindow.close();
+  }, 1000);
+  // hiddenWinClose();
+}
+
+exports.xlsubmit = function (){
+
 }

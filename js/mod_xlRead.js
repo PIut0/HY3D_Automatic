@@ -24,10 +24,11 @@ const main = remote.require('./main.js')
 
 exports.result_func = function(){
     let xlPath = main.setting.xlPath
+    let xlProperty = main.setting.xlProperty
     let xlfile = xlsx.readFile(xlPath)
     let sheet_name = "의뢰관리"
     let work_sheet = xlfile.Sheets[sheet_name]
-    console.log(work_sheet)
+    // console.log(work_sheet)
 
     // console.log("TEST")
     var id = document.getElementById("excel_no")
@@ -36,32 +37,32 @@ exports.result_func = function(){
     // console.log(id)
     
     let result = []
-    console.log(work_sheet['L'+String(id)].v)
+    // console.log(work_sheet['L'+String(id)].v)
     let x_machine
     let x_name
     let x_group
     let x_item
     try {
-        x_machine = work_sheet['L'+String(id)].v
+        x_machine = work_sheet[xlProperty.machine+String(id)].v
     } catch (error) {
         x_machine = "error"
     }
     try {
-        x_name = work_sheet['P'+String(id)].v
+        x_name = work_sheet[xlProperty.name+String(id)].v
     } catch (error) {
-        x_name = ""
+        x_name = "이름"
     }
     try {
-        x_group = work_sheet['O'+String(id)].v
+        x_group = work_sheet[xlProperty.group+String(id)].v
     } catch (error) {
         x_group = "기업명"
     }
     try {
-        x_item = work_sheet['T'+String(id)].v
+        x_item = work_sheet[xlProperty.item+String(id)].v
     } catch (error) {
         x_item = "아이템"
     }
-    console.log(x_machine)
+    if(x_group == "개인" || x_group == "기업명")    x_group = x_name
     // let data = work_sheet['L3']
     result.push(x_machine)
     result.push(x_name)

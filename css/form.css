@@ -29,7 +29,7 @@ body{
     position: relative;
     display: inline-block;
     border-top: 4px double black;
-    border-bottom: 2px dotted black;
+    border-bottom: 1px solid black;
     width: 150%;
     padding:6px;
 }

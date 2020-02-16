@@ -19,17 +19,20 @@ async function submit_func(){
     let painting_price = document.getElementById("painting_price").value
 
     let est_time = document.getElementById("time").value
-    //console.log(est_time)
     let xlresult = await xlread.result_func()
     let part_weight = pdfread.part_weight;
     let part_name = pdfread.part_name;
     let req_date = document.getElementById("req_date").value
+    let property = document.getElementById("property").value
+    let xl_num = document.getElementById("excel_no").value
+    // console.log(property)
     let delivery_price = document.getElementById("delivery_price").value
+    let delivery_num = document.getElementById("delivery_num").value
     let part_num = []
     for(var i=0;i<part_weight.length;i++){
         part_num.push(parseInt(document.getElementById(`part_${i}`).value))
     }
-    //console.log(file_name)
+    
     let file_name;
     var today = new Date()
     var year = today.getFullYear()
@@ -54,6 +57,8 @@ async function submit_func(){
     result["file_name"] = file_name
     result["req_date"] = parseInt(req_date)
     result["delivery_price"] = parseInt(delivery_price)
+    result["delivery_num"] = parseInt(delivery_num)
+    result["property"] = property
     result["part_weight"] = part_weight
     result["part_name"] = part_name
     result["part_num"] = part_num
@@ -65,7 +70,8 @@ async function submit_func(){
     result["painting"] = painting
     result["painting_num"] = painting_num
     result["painting_price"] = painting_price
-    //console.log(result)
+    result["xl_num"] = xl_num
+    console.log(result)
     main.submit(result)
     alert("작성 완료")
 }

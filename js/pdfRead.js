@@ -21,17 +21,19 @@ exports.part_name = part_name;
 
 function changeFile(){
 	part_weight = []
+	part_name = []
     const pdfFile = this.files[0];
     document.getElementById('upload-name-id').value = pdfFile.name;
 
     let dataBuffer = pdfFile.path;
-    dataBuffer = dataBuffer.replaceAll('\\','/');
-
+	dataBuffer = dataBuffer.replaceAll('\\','/');
+	
 	handleFiles(dataBuffer)
 }
 
 function recentlyFile(){
 	part_weight = []
+	part_name = []
 	var dir = setting.pdfPath
 	var files = fs.readdirSync(dir);
 
@@ -78,7 +80,8 @@ async function handleFiles(dataBuffer) {
 	// console.log(part_weight)
 	part_weight = await weight_modify(part_weight)
 	exports.part_weight = part_weight
-    // console.log(part_weight)
+	exports.part_name = part_name
+    console.log(part_name)
 }
 
 function weight_modify(part_weight){

@@ -105,12 +105,20 @@
         <h1 class="more_info">상세 정보 표시</h1>
         <table class="more_info_table" border="1">
           <tr>
-            <td>소요일자</td>
-            <td><input id="req_date" type="text" value="3"></td>
+            <td>분류선택</td>
+            <td>
+              <select name="property" id="property">
+                <option selected="selected">제작</option>
+                <option>설계</option>
+                <option>개발</option>
+                <option>도색</option>
+                <option></option>
+              </select>
+            </td>
           </tr>
           <tr>
-            <td>배송가격</td>
-            <td><input id="delivery_price" type="text" value="4000"></td>
+            <td>소요일자</td>
+            <td><input id="req_date" type="text" value="3"></td>
           </tr>
         </table>
         <table class="more_info_table" border="1">
@@ -143,6 +151,16 @@
             <td><input id="painting" type="text" value=""></td>
             <td><input id="painting_num" type="text" value=""></td>
             <td><input id="painting_price" type="text" value=""></td>
+          </tr>
+        </table>
+        <table class="more_info_table" border="1">
+          <tr>
+            <td>배송수량</td>
+            <td><input id="delivery_num" type="text" value="1"></td>
+          </tr>
+          <tr>
+            <td>배송가격</td>
+            <td><input id="delivery_price" type="text" value="4000"></td>
           </tr>
         </table>
       </div>
